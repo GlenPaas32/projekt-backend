@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="et">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sportlaste tulemused</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <p class="eyebrow">Punktiarvestus</p>
+        <h1>Sportlaste tulemused</h1>
+    </div>
+    <div class="status-pill" id="apiStatus">Backend</div>
+</header>
+
+<main class="layout">
+    <section class="panel">
+        <div class="panel-heading">
+            <h2>Spordialad</h2>
+            <button class="icon-button" id="refreshDisciplines" type="button" title="Uuenda alasid">&#8635;</button>
+        </div>
+
+        <form class="form-grid" id="disciplineForm">
+            <label>
+                Ala nimi
+                <input name="name" type="text" autocomplete="off" required placeholder="100m">
+            </label>
+            <label>
+                Koefitsient
+                <input name="pointsFactor" type="number" min="0.01" step="0.01" required placeholder="1.25">
+            </label>
+            <button type="submit">Lisa ala</button>
+        </form>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ala</th>
+                    <th>Koef.</th>
+                </tr>
+                </thead>
+                <tbody id="disciplineRows">
+                <tr><td colspan="3">Laen...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <h2>Sportlane</h2>
+        </div>
+
+        <form class="form-grid" id="athleteForm">
+            <label class="wide">
+                Nimi
+                <input name="name" type="text" autocomplete="off" required placeholder="Kati Tamm">
+            </label>
+            <button type="submit">Loo sportlane</button>
+        </form>
+
+        <form class="lookup-row" id="lookupForm">
+            <label>
+                Sportlase ID
+                <input name="athleteId" type="number" min="1" step="1" required>
+            </label>
+            <button type="submit">Ava</button>
+        </form>
+
+        <div class="athlete-summary" id="athleteSummary">
+            <span>Vali või loo sportlane</span>
+        </div>
+    </section>
+
+    <section class="panel result-panel">
+        <div class="panel-heading">
+            <h2>Tulemus</h2>
+            <button class="secondary" id="loadPoints" type="button">Punktid</button>
+        </div>
+
+        <form class="form-grid" id="resultForm">
+            <label>
+                Ala
+                <select name="discipline" required>
+                    <option value="">Vali ala</option>
+                </select>
+            </label>
+            <label>
+                Tulemus
+                <input name="resultValue" type="number" min="0.01" step="0.01" required placeholder="12.35">
+            </label>
+            <button type="submit">Lisa tulemus</button>
+        </form>
+
+        <div class="results-list" id="resultsList"></div>
+    </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
